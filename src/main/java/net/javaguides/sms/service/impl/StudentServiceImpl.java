@@ -14,14 +14,10 @@ public class StudentServiceImpl implements StudentService {
 	
 	private StudentRepository StudentRepository;
 	
-	public StudentServiceImpl(net.javaguides.sms.repository.StudentRepository studentRepository) {
+	public StudentServiceImpl(StudentRepository studentRepository) {
 		super();
 		StudentRepository = studentRepository;
 	}
-
-
-
-
 
 	@Override
 	public List<Student> getALLStudents() {

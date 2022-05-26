@@ -8,5 +8,4 @@ public class OperationRequest {
     private Integer accountId;
     private Double amount;
 
-
 }

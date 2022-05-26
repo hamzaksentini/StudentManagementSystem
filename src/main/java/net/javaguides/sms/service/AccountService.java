@@ -6,6 +6,8 @@ import net.javaguides.sms.repository.AccountRepository;
 import net.javaguides.sms.repository.OperationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountService {
 
@@ -27,5 +29,11 @@ public class AccountService {
         operationRepository.save(operation);
 
     }
+    public Account create(CreateAccountCommand command) {
+        return accountRepository.save(new Account());
+    }
 
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
 }

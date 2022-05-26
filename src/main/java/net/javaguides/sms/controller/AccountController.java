@@ -1,11 +1,14 @@
 package net.javaguides.sms.controller;
 
 
+import net.javaguides.sms.entity.OperationType;
 import net.javaguides.sms.service.AccountService;
 import net.javaguides.sms.service.OperationCommand;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import static net.javaguides.sms.entity.OperationType.WITHDRAW;
 
 @RestController("accounts")
 public class AccountController {
@@ -18,8 +21,12 @@ public class AccountController {
 
     @PostMapping("/withdraw")
     public void withdraw(@RequestBody OperationRequest request){
-        OperationCommand command = null;
-        accountService.withdraw(command);
+        OperationCommand command = OperationCommand.builder()
+                .accountId(request.getAccountId())
+                .amount(request.getAmount())
+                .type(WITHDRAW)
+                .build();
+        accountService.applyOperation(command);
     }
 
 }

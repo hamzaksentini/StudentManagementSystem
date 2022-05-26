@@ -1,17 +1,17 @@
 package net.javaguides.sms.service;
 
 
+import lombok.Builder;
 import lombok.Getter;
-
-import java.sql.Timestamp;
+import net.javaguides.sms.entity.OperationType;
 
 @Getter
+@Builder
 public class OperationCommand {
-    private final Double amount;
-    private final Timestamp createdDate;
 
-    public OperationCommand (Double amount, Timestamp createdDate){
-        this.amount = amount;
-        this.createdDate =createdDate;
-    }
+    private Integer accountId;
+    private Double amount;
+    private OperationType type;
+
+
 }

@@ -33,7 +33,6 @@ public class AccountController {
         accountService.applyOperation(command);
     }
 
-
     @PutMapping("/deposit")
     public void deposit(@RequestBody OperationRequest request) {
         OperationCommand command = OperationCommand.builder()
@@ -53,7 +52,6 @@ public class AccountController {
         AccountViewModel accountViewModel = new AccountViewModel(account);
         return ResponseEntity.ok(accountViewModel);
     }
-
 
     @GetMapping
     public ResponseEntity<List<AccountViewModel>> findAll() {

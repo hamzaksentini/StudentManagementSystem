@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "T_ACCOUNT")
-public class Account {
+public class Account extends AbstractAuditingEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

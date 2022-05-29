@@ -6,10 +6,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @EnableConfigurationProperties({BankProperties.class})
 @SpringBootApplication
-public class Application {
+public class BankApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(BankApplication.class, args);
     }
 
 

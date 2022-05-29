@@ -41,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @PostConstruct
     public void init() {
         try {
+
             authenticationManagerBuilder
                     .userDetailsService(userDetailsService)
                     .passwordEncoder(passwordEncoder);

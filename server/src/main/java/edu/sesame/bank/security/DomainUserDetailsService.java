@@ -28,17 +28,16 @@ public class DomainUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(final String username) {
         log.debug("Authenticating '{}'", username);
-
-        return userRepository.findOneWithAuthoritiesByEmail(username)
+        return userRepository.findOneWithAuthoritiesByLogin(username)
                 .map(this::createSpringSecurityUser)
-                .orElseThrow(() -> new UsernameNotFoundException("User with username '" + username + "' was not found in the database"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with login '" + username + "' was not found in the database"));
     }
 
     private org.springframework.security.core.userdetails.User createSpringSecurityUser(User user) {
         List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
-        AuthenticatedUser authenticatedUser = new AuthenticatedUser(user.getEmail(), user.getPassword(), grantedAuthorities);
+        AuthenticatedUser authenticatedUser = new AuthenticatedUser(user.getLogin(), user.getPassword(), grantedAuthorities);
         authenticatedUser.setLangKey("FR");
         authenticatedUser.setId(Long.valueOf(user.getId()));
         return authenticatedUser;

@@ -8,8 +8,12 @@ import lombok.Data;
 public class AccountViewModel {
 
     private Integer id;
+    private Double balance;
+    private String label;
 
     public AccountViewModel(Account account) {
         this.id = account.getId();
+        this.balance = account.getBalance();
+        this.label = account.getLabel();
     }
 }

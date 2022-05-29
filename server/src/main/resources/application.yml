@@ -22,7 +22,7 @@ spring:
 
 bank:
   cors:
-    allowed-origins: 'http://localhost:8082,http://localhost:9000'
+    allowed-origins: 'http://localhost:8082,http://localhost:4200'
     allowed-methods: '*'
     allowed-headers: '*'
     exposed-headers: 'Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params'

@@ -1,9 +1,10 @@
 package edu.sesame.bank.service;
 
 import edu.sesame.bank.entity.Account;
+import edu.sesame.bank.entity.Operation;
+import edu.sesame.bank.entity.User;
 import edu.sesame.bank.repository.AccountRepository;
 import edu.sesame.bank.repository.OperationRepository;
-import edu.sesame.bank.entity.Operation;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.List;
 public class AccountService {
 
     private final OperationRepository operationRepository;
+    private final UserService userService;
     private final AccountRepository accountRepository;
 
-    public AccountService(OperationRepository operationRepository, AccountRepository accountRepository) {
+    public AccountService(OperationRepository operationRepository, UserService userService, AccountRepository accountRepository) {
         this.operationRepository = operationRepository;
+        this.userService = userService;
         this.accountRepository = accountRepository;
     }
 
@@ -29,11 +32,13 @@ public class AccountService {
         operationRepository.save(operation);
 
     }
+
     public Account create(CreateAccountCommand command) {
         return accountRepository.save(new Account());
     }
 
     public List<Account> findAll() {
-        return accountRepository.findAll();
+        User currentUser = userService.findCurrentUser();
+        return accountRepository.findByUser(currentUser);
     }
 }

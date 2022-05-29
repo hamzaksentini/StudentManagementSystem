@@ -1,8 +1,10 @@
 package edu.sesame.bank.controller;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import edu.sesame.bank.controller.model.JwtResponse;
 import edu.sesame.bank.controller.model.LoginRequest;
+import edu.sesame.bank.entity.User;
+import edu.sesame.bank.repository.UserRepository;
 import edu.sesame.bank.security.jwt.JWTFilter;
 import edu.sesame.bank.security.jwt.TokenProvider;
 import org.springframework.http.HttpHeaders;
@@ -21,20 +23,22 @@ import org.springframework.web.bind.annotation.RestController;
  * Controller to authenticate users.
  */
 @RestController
-@RequestMapping("/api")
-public class UserController {
+@RequestMapping("api/auth")
+public class AuthController {
 
     private final TokenProvider tokenProvider;
+    private final UserRepository userRepository;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public UserController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    public AuthController(TokenProvider tokenProvider, UserRepository userRepository, AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.tokenProvider = tokenProvider;
+        this.userRepository = userRepository;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<JWTToken> authenticate(@RequestBody LoginRequest request) {
+    @PostMapping("/signin")
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest request) {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
 
@@ -44,23 +48,9 @@ public class UserController {
         String jwt = tokenProvider.createToken(authentication, rememberMe);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+        User user = userRepository.findOneWithAuthoritiesByLogin(request.getUsername()).get();
+        return new ResponseEntity<>(new JwtResponse(jwt, Long.valueOf(user.getId()), user.getLogin(), user.getEmail(), user.getAuthorities()), httpHeaders, HttpStatus.OK);
+
     }
 
-    static class JWTToken {
-        private String idToken;
-
-        JWTToken(String idToken) {
-            this.idToken = idToken;
-        }
-
-        @JsonProperty("id_token")
-        String getIdToken() {
-            return idToken;
-        }
-
-        void setIdToken(String idToken) {
-            this.idToken = idToken;
-        }
-    }
 }

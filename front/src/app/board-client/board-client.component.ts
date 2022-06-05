@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from "../_services/account.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-board-client',
@@ -10,7 +11,8 @@ export class BoardClientComponent implements OnInit {
 
   accounts?: Array<any>;
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService, private _router: Router) {
+  }
 
   ngOnInit(): void {
     this.accountService.getAccounts().subscribe(
@@ -22,4 +24,9 @@ export class BoardClientComponent implements OnInit {
       }
     );
   }
+
+  openAccountDetails(accountId: number): void {
+    this._router.navigate([`account/${accountId}`]);
+  }
+
 }

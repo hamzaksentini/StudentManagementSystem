@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardClientComponent } from './board-client/board-client.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
+import {AccountComponent} from "./account/account.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'client', component: BoardClientComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: 'account/:id', component: AccountComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

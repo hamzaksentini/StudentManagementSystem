@@ -14,6 +14,7 @@ import { BoardClientComponent } from './board-client/board-client.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     ProfileComponent,
     BoardAdminComponent,
     BoardClientComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

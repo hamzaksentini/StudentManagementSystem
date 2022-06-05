@@ -29,9 +29,11 @@ public class AccountService {
                 .account(account)
                 .amount(command.getAmount())
                 .type(command.getType())
+                .label(command.getLabel())
                 .build();
+        account.setBalance(command.getType().apply(account.getBalance(), command.getAmount()));
         operationRepository.save(operation);
-
+        accountRepository.save(account);
     }
 
     public Account create(CreateAccountCommand command) {

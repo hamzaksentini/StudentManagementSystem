@@ -78,83 +78,78 @@
       <!-- Project Card Example -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+          <h6 class="m-0 font-weight-bold text-primary">Deposit</h6>
         </div>
         <div class="card-body">
 
 
+          <form
+            name="depositForm"
+            (ngSubmit)="f.form.valid && onDeposit()"
+            #f="ngForm"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input
+                type="text"
+                class="form-control"
+                name="amount"
+                [(ngModel)]="depositForm.amount"
+                required
+                #amount="ngModel"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="amount.errors && f.submitted"
+              >
+                Amount is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="label">Label</label>
+              <input
+                type="label"
+                class="form-control"
+                name="label"
+                [(ngModel)]="depositForm.label"
+                required
+                minlength="4"
+                #label="ngModel"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="label.errors && f.submitted"
+              >
+                <div *ngIf="label.errors.required">Label is required</div>
+                <div *ngIf="label.errors.minlength">
+                  Label must be at least 4 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block">
+                Submit
+              </button>
+            </div>
+            <div class="form-group">
+              <div
+                class="alert alert-success"
+                role="alert"
+                *ngIf="f.submitted && isDepositSucceeded"
+              >
+                Deposit in account {{account.label}} Succeeded
+              </div>
+            </div>
+          </form>
 
 
         </div>
       </div>
 
       <!-- Color System -->
-      <div class="row">
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-primary text-white shadow">
-            <div class="card-body">
-              Primary
-              <div class="text-white-50 small">#4e73df</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-success text-white shadow">
-            <div class="card-body">
-              Success
-              <div class="text-white-50 small">#1cc88a</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-info text-white shadow">
-            <div class="card-body">
-              Info
-              <div class="text-white-50 small">#36b9cc</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-warning text-white shadow">
-            <div class="card-body">
-              Warning
-              <div class="text-white-50 small">#f6c23e</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-danger text-white shadow">
-            <div class="card-body">
-              Danger
-              <div class="text-white-50 small">#e74a3b</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-secondary text-white shadow">
-            <div class="card-body">
-              Secondary
-              <div class="text-white-50 small">#858796</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-light text-black shadow">
-            <div class="card-body">
-              Light
-              <div class="text-black-50 small">#f8f9fc</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-dark text-white shadow">
-            <div class="card-body">
-              Dark
-              <div class="text-white-50 small">#5a5c69</div>
-            </div>
-          </div>
-        </div>
-      </div>
 
     </div>
 
@@ -163,35 +158,78 @@
       <!-- Illustrations -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+          <h6 class="m-0 font-weight-bold text-primary">Withdraw</h6>
         </div>
         <div class="card-body">
-          <div class="text-center">
-            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                 src="img/undraw_posting_photo.svg" alt="...">
-          </div>
-          <p>Add some quality, svg illustrations to your project courtesy of <a
-            target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-            constantly updated collection of beautiful svg images that you can use
-            completely free and without attribution!</p>
-          <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-            unDraw &rarr;</a>
+
+
+          <form
+            name="withdrawForm"
+            (ngSubmit)="f.form.valid && onWithdraw()"
+            #f="ngForm"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input
+                type="text"
+                class="form-control"
+                name="amount"
+                [(ngModel)]="withdrawForm.amount"
+                required
+                #amount="ngModel"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="amount.errors && f.submitted"
+              >
+                Username is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="label">Label</label>
+              <input
+                type="label"
+                class="form-control"
+                name="label"
+                [(ngModel)]="withdrawForm.label"
+                required
+                minlength="4"
+                #label="ngModel"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="label.errors && f.submitted"
+              >
+                <div *ngIf="label.errors.required">Lable is required</div>
+                <div *ngIf="label.errors.minlength">
+                  Label must be at least 4 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block">
+                Submit
+              </button>
+            </div>
+            <div class="form-group">
+              <div
+                class="alert alert-success"
+                role="alert"
+                *ngIf="f.submitted && isWithdrawSucceeded"
+              >
+                Withdraw in account {{account.label}} Succeeded
+              </div>
+            </div>
+          </form>
+
+
         </div>
       </div>
 
       <!-- Approach -->
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-        </div>
-        <div class="card-body">
-          <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-            CSS bloat and poor page performance. Custom CSS classes are used to create
-            custom components and custom utility classes.</p>
-          <p class="mb-0">Before working with this theme, you should become familiar with the
-            Bootstrap framework, especially the utility classes.</p>
-        </div>
-      </div>
 
     </div>
   </div>

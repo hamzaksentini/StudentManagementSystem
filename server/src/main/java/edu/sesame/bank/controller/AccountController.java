@@ -29,13 +29,21 @@ public class AccountController {
 
     @PutMapping("/withdraw")
     public void withdraw(@RequestBody OperationRequest request) {
-        OperationCommand command = OperationCommand.builder().accountId(request.getAccountId()).amount(request.getAmount()).type(OperationType.WITHDRAW).build();
+        OperationCommand command = OperationCommand.builder()
+                .accountId(request.getAccountId())
+                .amount(request.getAmount())
+                .label(request.getLabel())
+                .type(OperationType.WITHDRAW).build();
         accountService.applyOperation(command);
     }
 
     @PutMapping("/deposit")
     public void deposit(@RequestBody OperationRequest request) {
-        OperationCommand command = OperationCommand.builder().accountId(request.getAccountId()).amount(request.getAmount()).type(OperationType.DEPOSIT).build();
+        OperationCommand command = OperationCommand.builder()
+                .accountId(request.getAccountId())
+                .amount(request.getAmount())
+                .label(request.getLabel())
+                .type(OperationType.DEPOSIT).build();
         accountService.applyOperation(command);
     }
 

@@ -12,6 +12,7 @@ public class OperationCommand {
     private Integer accountId;
     private Double amount;
     private OperationType type;
+    private String label;
 
 
 }

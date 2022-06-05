@@ -14,13 +14,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "T_OPERATION")
-public class Operation extends AbstractAuditingEntity{
+public class Operation extends AbstractAuditingEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Double amount;
+
+    private String label;
 
     @Enumerated(EnumType.STRING)
     private OperationType type;

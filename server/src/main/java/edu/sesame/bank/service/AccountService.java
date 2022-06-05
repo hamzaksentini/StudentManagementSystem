@@ -8,6 +8,7 @@ import edu.sesame.bank.repository.OperationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -40,5 +41,13 @@ public class AccountService {
     public List<Account> findAll() {
         User currentUser = userService.findCurrentUser();
         return accountRepository.findByUser(currentUser);
+    }
+
+    public Optional<Account> findById(Integer id) {
+        return accountRepository.findById(id);
+    }
+
+    public List<Operation> getOperations(Integer id) {
+        return operationRepository.findByAccountIdOrderByCreatedDateDesc(id);
     }
 }

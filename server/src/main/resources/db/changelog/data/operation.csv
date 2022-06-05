@@ -1,0 +1,3 @@
+id;label;amount;type;account_id
+1;First deposit;40;DEPOSIT;1
+2;Salary;60;DEPOSIT;1

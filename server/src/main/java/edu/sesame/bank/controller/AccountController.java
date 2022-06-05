@@ -5,6 +5,7 @@ import edu.sesame.bank.controller.model.AccountCreationRequest;
 import edu.sesame.bank.controller.model.AccountViewModel;
 import edu.sesame.bank.controller.model.OperationRequest;
 import edu.sesame.bank.entity.Account;
+import edu.sesame.bank.entity.Operation;
 import edu.sesame.bank.entity.OperationType;
 import edu.sesame.bank.service.AccountService;
 import edu.sesame.bank.service.CreateAccountCommand;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController()
@@ -49,6 +51,14 @@ public class AccountController {
     public ResponseEntity<List<AccountViewModel>> findAll() {
         List<AccountViewModel> accounts = accountService.findAll().stream().map(AccountViewModel::new).collect(Collectors.toList());
         return ResponseEntity.ok(accounts);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountViewModel> findById(@PathVariable Integer id) {
+        Optional<Account> account = accountService.findById(id);
+        List<Operation> operations = accountService.getOperations(id);
+        AccountViewModel accountViewModel = account.map(a -> new AccountViewModel(a, operations)).orElse(null);
+        return ResponseEntity.ok(accountViewModel);
     }
 
 }

@@ -169,6 +169,7 @@
             <column name="type" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
+            <column name="label" type="varchar(50)"/>
             <column name="account_id" type="bigint"/>
             <column name="created_by" type="varchar(50)"/>
             <column name="created_date" type="timestamp"/>
@@ -190,6 +191,11 @@
                 file="db/changelog/data/account.csv"
                 separator=";"
                 tableName="T_ACCOUNT"/>
+
+        <loadData
+                file="db/changelog/data/operation.csv"
+                separator=";"
+                tableName="T_OPERATION"/>
 
     </changeSet>
 </databaseChangeLog>

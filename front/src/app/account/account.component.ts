@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {AccountService} from "../_services/account.service";
 
 @Component({
   selector: 'app-account',
@@ -8,17 +9,22 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class AccountComponent implements OnInit, OnDestroy {
 
-  id: any;
+  account: any;
   private sub: any;
 
-  constructor(private _route: ActivatedRoute) {
+  constructor(private _route: ActivatedRoute, private accountService: AccountService) {
   }
 
   ngOnInit() {
     this.sub = this._route.params.subscribe(params => {
-      this.id = +params['id']; // (+) converts string 'id' to a number
-
-      // In a real app: dispatch action to load the details here.
+      this.accountService.getAccount(+params['id']).subscribe(
+        data => {
+          this.account = data;
+        },
+        err => {
+          this.account = JSON.parse(err.error).message;
+        }
+      );
     });
   }
 
